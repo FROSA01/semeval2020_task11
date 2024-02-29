@@ -1,0 +1,2 @@
+https://github.com/aschern/semeval2020_task11
+[Aschern at SemEval-2020 Task 11: It Takes Three to Tango: RoBERTa, CRF, and Transfer Learning](https://aclanthology.org/2020.semeval-1.191) (Chernyavskiy et al., SemEval 2020)
