@@ -1,8 +1,12 @@
 # coding=utf-8
 import numpy as np
 import pandas as pd
+import nltk
+nltk.download('punkt')
+nltk.download('stopwords')
 from nltk.stem import PorterStemmer
 from nltk.tokenize import word_tokenize
+from nltk import word_tokenize,sent_tokenize
 from collections import defaultdict
 from sklearn.utils.extmath import softmax
 from sklearn.metrics import accuracy_score, f1_score
@@ -178,7 +182,9 @@ def create_submission_file(predicted_logits_files, train_file_path, dev_file_pat
     
     predictions_logits = None
     predictions_logits_list = []
+
     for file, weight in zip(predicted_logits_files, weights):
+        print(file)
         with open(file, 'rb') as f:
             logits = pickle.load(f)
             if predictions_logits is None:

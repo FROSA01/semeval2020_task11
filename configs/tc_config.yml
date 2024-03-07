@@ -3,12 +3,12 @@
 propaganda_techniques_file: tools/data/propaganda-techniques-names-semeval2020task11.txt
 train_data_folder: datasets/train-articles
 #test_data_folder: datasets/train-articles
-test_data_folder: datasets/dev-articles
-#test_data_folder: datasets/test/test-articles
+# test_data_folder: datasets/dev-articles
+test_data_folder: datasets/test-articles
 labels_path: datasets/train-task2-TC.labels
 #test_template_labels_path: results/mydev-task-TC.labelss
-test_template_labels_path: datasets/dev-task-TC-template.out
-#test_template_labels_path: datasets/test/test-task-TC-template.out
+# test_template_labels_path: datasets/dev-task-TC-template.out
+test_template_labels_path: datasets/test-task-tc-template.out
 data_dir: cached_datasets/TC/
 train_file: train.tsv
 dev_file: dev.tsv
@@ -26,7 +26,7 @@ overwrite_cache: False
 
 output_file: TC_output_dev_sc.txt
 #weights: [1, 0]
-predicted_logits_files: [model_checkpoints/tc_roberta_joineds/predicted_logits]
+predicted_logits_files: [model_checkpoints/tc_roberta_large_cased_transfer_3500/tc_roberta_large_cased_transfer_3500/predicted_logits]
 
 
 -------------transformers params------------
@@ -35,13 +35,13 @@ task_name: prop
 model_type: roberta
 #model_name_or_path: model_checkpoints/tc_roberta_large_cased_transfer_joined
 model_name_or_path: model_checkpoints/tc_roberta_large_cased_transfer_3500
-max_seq_length: 256
+max_seq_length: 16
 per_gpu_train_batch_size: 8
 per_gpu_eval_batch_size: 8
 learning_rate: 2e-5
-save_steps: 700
+save_steps: 600
 warmup_steps: 500
-num_train_epochs: 10
+num_train_epochs: 1
 #output_dir: model_checkpoints/tc_roberta_large_cased_transfer_joined
 output_dir: model_checkpoints/tc_roberta_large_cased_transfer_3500
 do_lower_case: False
