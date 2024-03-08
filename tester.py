@@ -1,32 +1,22 @@
-import os
-import sys
-import argparse
-import logging.handlers
-import propaganda.src.annotation as an
-import propaganda.src.annotations as ans
-import propaganda.src.propaganda_techniques as pt
+def count_labels(filename):
+    label_counts = {}
 
-def datadup(directory):
-    first_lines = []
-    for filename in os.listdir(directory):
-        f = os.path.join(directory, filename)
-        if os.path.isfile(f):
-            fline=open(f, encoding="utf8").readline().rstrip()
-            first_lines += [[fline]]
-        dupes = [x for n, x in enumerate(first_lines) if x in first_lines[:n]]
-    print(dupes)
-    if dupes == []:
-        return False
-    else:
-        return True
-    
-def annotate(directory):
-    for filename in os.listdir(directory):
-        f = os.path.join(directory, filename)
-        if os.path.isfile(f):
-            user_annotations = ans.Annotations()
-            user_annotations.load_annotation_list_from_file(f)
-            print(user_annotations)
+    with open(filename, 'r') as file:
+        for line in file:
+            columns = line.strip().split('\t')
+            if len(columns) >= 2:
+                labels = columns[1].split(',')
+                for label in labels:
+                    label_counts[label] = label_counts.get(label, 0) + 1
 
-print(datadup('datasets/dev-articles'))
-annotate('datasets/test-articles/')
+    return label_counts
+
+def main():
+    filename = 'results\TC_output_dev_sc.txt' 
+    label_counts = count_labels(filename)
+
+    for label, count in label_counts.items():
+        print(f'{label}: {count}')
+
+if __name__ == "__main__":
+    main()
